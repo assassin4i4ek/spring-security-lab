@@ -32,10 +32,13 @@ fun App() {
             if (t.isBlank()) {
                 LoginScreen(
                     snackbarHostState,
-                    updateToken =  { token = it },
+                    updateToken = { token = it },
                 )
             } else {
-                MainScreen(t)
+                MainScreen(
+                    snackbarHostState,
+                    token = t
+                )
             }
         }
     }
