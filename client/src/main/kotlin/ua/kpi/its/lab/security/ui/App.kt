@@ -13,17 +13,27 @@ import ua.kpi.its.lab.security.ui.main.MainScreen
 @Preview
 fun App() {
     var token by remember { mutableStateOf("") }
-    Scaffold(topBar = {
-        if (token.isNotBlank()) {
-            AppBar()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    Scaffold(
+        topBar = {
+            if (token.isNotBlank()) {
+                AppBar()
+            }
+        },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
         }
-    }) { innerPadding ->
+    ) { innerPadding ->
         Crossfade(
             targetState = token,
             modifier = Modifier.padding(innerPadding)
         ) { t ->
             if (t.isBlank()) {
-                LoginScreen { token = it }
+                LoginScreen(
+                    snackbarHostState,
+                    updateToken =  { token = it },
+                )
             } else {
                 MainScreen(t)
             }
