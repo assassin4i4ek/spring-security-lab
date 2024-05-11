@@ -103,7 +103,7 @@ class VehicleController @Autowired constructor(
 class AuthenticationTokenController @Autowired constructor(
     private val encoder: JwtEncoder
 ) {
-    private val authTokenExpiry: Long = 60L // in seconds
+    private val authTokenExpiry: Long = 3600L // in seconds
 
     @PostMapping("token")
     fun token(auth: Authentication): String {
